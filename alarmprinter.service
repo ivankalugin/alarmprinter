@@ -1,0 +1,15 @@
+[Unit]
+Description=alarmprinter service
+After=network.target
+After=cups
+After=postgresql
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/usr/bin/env perl /usr/local/bin/alarmprinter.pl
+
+[Install]
+WantedBy=multi-user.target
