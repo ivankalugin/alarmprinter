@@ -7,6 +7,8 @@ CREATE SEQUENCE alarmprinter.seq_id
     MINVALUE 1
     MAXVALUE 9223372036854775807
     CACHE 1;
+    
+GRANT ALL ON SEQUENCE alarmprinter.seq_id TO alarmprinter;    
 
 CREATE TABLE alarmprinter.alarmprinter
 (
@@ -31,4 +33,4 @@ CREATE TABLE alarmprinter.alarmprinter
   CONSTRAINT pk_alarmprinter PRIMARY KEY (id)
 );
 
-
+GRANT ALL ON TABLE alarmprinter.alarmprinter TO alarmprinter;
