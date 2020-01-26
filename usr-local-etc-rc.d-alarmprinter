@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# PROVIDE: alarmprinter
+# REQUIRE: postgresql
+# REQUIRE: cupsd
+# BEFORE: LOGIN
+
+. /etc/rc.subr
+
+name="alarmprinter"
+rcvar=alarmprinter_enable
+
+command=/usr/local/bin/${name}
+start_cmd=alarmprinter_start
+
+load_rc_config $name
+
+: ${alarmprinter_enable="NO"}
+
+alarmprinter_start()
+{
+    echo "Starting alarmprinter."
+    perl ${command} &
+}
+
+run_rc_command "$1"
