@@ -7,6 +7,7 @@
 #
 use IO::Socket::INET;
 use DBI;
+use Encode;
 $printerport=12000;
 $dbname = "intouch";
 $username = "alarmprinter";
@@ -30,6 +31,7 @@ while ($pjob=$pserve->accept()) {
 		$value[0] = 'LOCALTIMESTAMP';
 		$dbiPg = DBI->connect("DBI:Pg:dbname=$dbname;host=$dbhost;port=$dbport;","$username","$password",{ RaiseError => 1});
 		$query = "INSERT INTO alarmprinter.alarmprinter(printerdt, alarmdt, state, class, type, priority, name, alarmgroup, provider, value, valuelimit, node, operator, comment) VALUES ($value[0],'$value[1]','$value[2]','$value[3]','$value[4]','$value[5]','$value[6]','$value[7]','$value[8]','$value[9]','$value[10]','$value[11]','$value[12]','$value[13]');";
+		Encode::from_to($query, 'cp866', 'windows-1251');
 		$result = $dbiPg->do($query);
 		$dbiPg->disconnect();
 	    }
